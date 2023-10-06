@@ -79,25 +79,21 @@ class Solution:
                 stack.append(num)
         return stack
 
+        # stack = []
 
-
-        # for num in asteroids:
+        # for i in asteroids:
         #     if not stack:
-        #         stack.append(num)
-        #     if num > 0:
-        #         stack.append(num)
-        #     elif num < 0 and stack[-1] < 0:
-        #         stack.append(num)
-        #     elif num < 0 and stack[-1] > 0:
-        #         while stack and stack[-1] > 0:
-        #             if stack[-1] == abs(num):
-        #                 stack.pop()
-        #                 break
-        #             if stack[-1] > abs(num):
-        #                 break
-        #             elif stack[-1] < abs(num):
-        #                 stack.pop()
-        #         else:
-        #                 stack.append(num)
+        #         stack.append(i)
+        #     elif i > 0:
+        #         stack.append(i)
+        #     elif i < 0 and stack[-1] < 0:
+        #         stack.append(i)
+        #     else:
+        #         while stack and stack[-1] > 0 and -i > stack[-1]:
+        #             stack.pop()
+        #         if stack and stack[-1] > 0 and -i == stack[-1]:
+        #             stack.pop()
+        #         elif not stack or stack[-1] < 0:
+        #             stack.append(i)
         # return stack
 # @lc code=end
