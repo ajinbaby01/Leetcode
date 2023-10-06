@@ -75,13 +75,13 @@ class Solution:
         # We are essentially looking for the first leaf node in level-order traversal
         # https://www.youtube.com/watch?v=tZS4VHtbYoo
 
-        #BFS (Level-Order Traversal)
+        # BFS (Level-Order Traversal)
         if not root:
             return 0
         q = collections.deque()
         depth = 1
         q.append((root, depth))
-        while q:
+        while True:
             node, depth = q.popleft()
             if not node.right and not node.left:
                 return depth
