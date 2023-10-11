@@ -66,6 +66,10 @@
 #         self.right = right
 class Solution:
     def goodNodes(self, root: TreeNode) -> int:
+        # return self.neetcodeGoodNodes(root)
+        return self.myGoodNodes(root)
+
+    def myGoodNodes(self, root):
         # Traverse each path
         # Keep track of the maximum in the path
         # If value of current node is equal or greater than the maximum
@@ -81,4 +85,21 @@ class Solution:
             dfs(root.right, curMax)
         dfs(root, root.val)
         return self.count
+
+    def neetcodeGoodNodes(self, root):
+        def dfs(root, curMax):
+            if not root:
+                return 0
+            if root.val >= curMax:
+                count = 1
+                curMax = root.val
+            else:
+                count = 0
+
+            # Add number of good nodes from left and right subtree to root count
+            count += dfs(root.left, curMax)
+            count += dfs(root.right, curMax)
+            return count
+
+        return dfs(root, root.val)
 # @lc code=end
