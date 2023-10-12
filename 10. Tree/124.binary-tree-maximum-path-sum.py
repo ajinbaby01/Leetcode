@@ -75,4 +75,42 @@ class Solution:
             return max(0, root.val + max(left, right))
         dfs(root)
         return self.maxPath
+
+    def maxPathSumWithPath(self, root):
+        # Gives the path (not in order)
+        self.maxSum = root.val
+        self.maxPath = [root.val]
+
+        def dfs(root):
+            if not root:
+                return 0, []
+
+            left_sum, left_path = dfs(root.left)
+            right_sum, right_path = dfs(root.right)
+
+            current_sum = root.val + left_sum + right_sum
+            current_path = [root.val]
+
+            if left_sum > 0:
+                current_path.extend(left_path)
+            if right_sum > 0:
+                current_path.extend(right_path)
+
+            if current_sum > self.maxSum:
+                self.maxSum = current_sum
+                self.maxPath = current_path
+                # This current_path is root.left + root + root.right
+
+            current_path = [root.val]
+            if left_sum > right_sum:
+                current_path.extend(left_path)
+            else:
+                current_path.extend(right_path)
+            # We return root + max(root.left, root.right) as new current_path
+
+            return max(0, root.val + max(left_sum, right_sum)), current_path
+
+        dfs(root)
+        print(self.maxPath)
+        return self.maxSum
 # @lc code=end
