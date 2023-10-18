@@ -41,8 +41,34 @@
 #
 
 # @lc code=start
+from collections import defaultdict
+
+
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        # return self.sortedDictionaryMethod(nums, k)
+        return self.betterTopKFrequent(nums, k)
+
+    def betterTopKFrequent(self, nums, k):
+        # Using the indices of an array to map frequency to num
+        count = defaultdict(int)
+        freq = [[] for _ in range(len(nums) + 1)]
+        answer = []
+
+        for num in nums:
+            count[num] += 1
+
+        for num, fre in count.items():
+            freq[fre].append(num)
+
+        for i in range(len(freq) - 1, -1 , -1):
+            if freq[i]:
+                answer.extend(freq[i])
+                if len(answer) == k:
+                    return answer
+    # Time: O(n), Space: O(n)
+
+    def sortedDictionaryMethod(self, nums, k):
         hm = {}
 
         for num in nums:
@@ -58,4 +84,8 @@ class Solution:
             answer.append(sorted_hm[i][0])
 
         return answer
+
+    # Time: O(nlogn), Space: O(n)
+
+
 # @lc code=end
