@@ -58,11 +58,8 @@
 class Solution:
     def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
 
-        # Return None if no nodes
-        if not head:
-            return None
-        # Return head itself if only one node
-        elif not head.next:
+        # Return head if no nodes or only one node
+        if not head or head.next:
             return head
 
         curr = nxt = head
