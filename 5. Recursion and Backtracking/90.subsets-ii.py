@@ -53,16 +53,16 @@ class Solution:
             return answer
         # return recursionWithVisited(nums)
 
-        def recursionWithWhileLoop(nums, path=[], answer=[]):
+        def recursion(nums, path=[], answer=[]):
             answer.append(path[:])
 
             for i in range(len(nums)):
                 if i > 0 and nums[i] == nums[i-1]:
                     continue
                 path.append(nums[i])
-                recursionWithWhileLoop(nums[i+1:])
+                recursion(nums[i+1:])
                 path.pop()
             return answer
-        return recursionWithWhileLoop(nums)
+        return recursion(nums)
 
 # @lc code=end
