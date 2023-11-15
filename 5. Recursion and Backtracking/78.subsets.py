@@ -52,7 +52,7 @@ class Solution:
             answer.append(path[:])
             for i in range(len(nums)):
                 path.append(nums[i])
-                recursion(nums[i+1:], path)
+                recursion(nums[i+1:])
                 path.pop()
             return answer
         return recursion(nums)
