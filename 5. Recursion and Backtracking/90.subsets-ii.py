@@ -41,7 +41,7 @@
 class Solution:
     def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
         nums.sort()
-        def recursion(nums, path=[], answer=[]):
+        def recursionWithVisited(nums, path=[], answer=[]):
             answer.append(path)
 
             visited = set()
@@ -49,8 +49,20 @@ class Solution:
             for i in range(len(nums)):
                 if nums[i] not in visited:
                     visited.add(nums[i])
-                    recursion(nums[i+1:], path + [nums[i]])
+                    recursionWithVisited(nums[i+1:], path + [nums[i]])
             return answer
-        return recursion(nums)
+        # return recursionWithVisited(nums)
+
+        def recursionWithWhileLoop(nums, path=[], answer=[]):
+            answer.append(path[:])
+
+            for i in range(len(nums)):
+                if i > 0 and nums[i] == nums[i-1]:
+                    continue
+                path.append(nums[i])
+                recursionWithWhileLoop(nums[i+1:])
+                path.pop()
+            return answer
+        return recursionWithWhileLoop(nums)
 
 # @lc code=end
