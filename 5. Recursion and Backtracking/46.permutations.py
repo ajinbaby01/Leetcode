@@ -50,7 +50,7 @@ class Solution:
             for i in range(len(nums)):
                 perms.append(nums[i])
                 newNums = nums[:i] + nums[i+1:]
-                recursion(newNums, perms)
+                recursion(newNums)
                 perms.pop()
             return answer
 
