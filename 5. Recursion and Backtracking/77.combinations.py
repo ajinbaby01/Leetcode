@@ -60,4 +60,22 @@ class Solution:
             return answer
         return recursion(1)
 
+#     # if the array is not [1..n] but is a given list
+#     def combine(self, nums: List, k: int) -> List[List[int]]:
+#         nums.sort()
+#         def recursion(nums, start, comb=[], answer=[]):
+#             if len(comb) == k:
+#                 answer.append(comb[:])
+
+#             visited = set() # if nums contain duplicates
+
+#             for i in range(start, len(nums)):
+#                 if nums[i] not in visited:
+#                     visited.add(nums[i])
+#                     comb.append(nums[i])
+#                     recursion(nums, i+1, comb)
+#                     comb.pop()
+#             return answer
+#         return recursion(nums, 0)
+# print(Solution().combine([3,5,6], 2))
 # @lc code=end
