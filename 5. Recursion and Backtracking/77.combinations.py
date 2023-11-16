@@ -53,6 +53,7 @@ class Solution:
         def recursion(start, comb=[], answer=[]):
             if len(comb) == k:
                 answer.append(comb[:])
+                return
             for i in range(start, n+1):
                 comb.append(i)
                 recursion(i+1, comb)
