@@ -47,7 +47,7 @@
 # @lc code=start
 class Solution:
     def permuteUnique(self, nums: List[int]) -> List[List[int]]:
-        def recursion(nums, perms=[], answer=[]):
+        def recursionWithVisited(nums, perms=[], answer=[]):
             if not nums:
                 answer.append(perms[:])
 
@@ -58,9 +58,23 @@ class Solution:
                     visited.add(nums[i])
                     perms.append(nums[i])
                     newNums = nums[:i] + nums[i+1:]
-                    recursion(newNums, perms)
+                    recursionWithVisited(newNums, perms)
                     perms.pop()
             return answer
-        return recursion(nums)
+        # return recursionWithVisited(nums)
+        
+        nums.sort()
+        def recursionWithSort(nums, perms=[], answer=[]):
+            if not nums:
+                answer.append(perms[:])
+
+            for i in range(len(nums)):
+                if i > 0 and nums[i] == nums[i-1]:
+                    continue
+                perms.append(nums[i])
+                recursionWithSort(nums[:i] + nums[i+1:])
+                perms.pop()
+            return answer
+        return recursionWithSort(nums)
 
 # @lc code=end
