@@ -85,13 +85,13 @@ class Solution:
                 return dfs(row, col + 1)
 
             for num in range(1, 10):
+                num = str(num)
                 if isValid(num, row, col):
-                    board[row][col] = str(num)
+                    board[row][col] = num
                     if dfs(row, col + 1):
                         return True
                     board[row][col] = '.'
-            return True
+            return False
 
         dfs(0, 0)
-
 # @lc code=end
