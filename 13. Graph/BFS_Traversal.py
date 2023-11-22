@@ -15,20 +15,23 @@ def bfs(matrix):
     directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
 
     def traverse(i, j):
-       queue = deque([(i, j)])
+        queue = deque([(i, j)])
 
-       while queue:
-          i, j = queue.popleft()
-          if (i, j) in visited:
-             continue
+        while queue:
+            i, j = queue.popleft()
+            if (
+               (i, j) in visited or
+                i not in range(rows) or
+                j not in range(cols)
+            ):
+               continue
 
-          visited.add((i, j))
-          res.append(matrix[i][j])
+            visited.add((i, j))
+            res.append(matrix[i][j])
 
-          for direction in directions:
-             next_i, next_j = i + direction[0], j + direction[1]
-             if next_i in range(rows) and next_j in range(cols):
-                queue.append((next_i, next_j))
+            for direction in directions:
+               next_i, next_j = i + direction[0], j + direction[1]
+               queue.append((next_i, next_j))
 
     for i in range(rows):
        for j in range(cols):

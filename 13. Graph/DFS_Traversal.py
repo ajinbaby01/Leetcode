@@ -13,16 +13,19 @@ def dfs(matrix):
     directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
 
     def traverse(i, j):
-        if (i, j) in visited:
+        if (
+           (i, j) in visited or
+           i not in range(rows) or
+           j not in range(cols)
+        ):
            return
 
         visited.add((i, j))
         res.append(matrix[i][j])
 
         for direction in directions:
-           next_i, next_j = i + direction[0], j + direction[1]
-           if next_i in range(rows) and next_j in range(cols):
-              traverse(next_i, next_j)
+            next_i, next_j = i + direction[0], j + direction[1]
+            traverse(next_i, next_j)
 
     for i in range(rows):
        for j in range(cols):
