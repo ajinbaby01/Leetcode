@@ -33,9 +33,7 @@ def bfs(matrix):
                next_i, next_j = i + direction[0], j + direction[1]
                queue.append((next_i, next_j))
 
-    for i in range(rows):
-       for j in range(cols):
-          traverse(i, j)
+    traverse(0, 0)
 
 matrix = [["1","2","3","4","5"],["6","7","8","9","10"],["11","12","13","14","15"],["16","17","18","19","20"]]
 bfs(matrix)
