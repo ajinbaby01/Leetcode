@@ -90,6 +90,9 @@ Pacific [2, 4, 5, 3, 1] Atlantic
     ]       Atlantic
     """
     def pacificAtlantic(self, heights: List[List[int]]) -> List[List[int]]:
+        # Start from cells near the oceans and perform dfs/bfs search satisfying graph traversal conditions and if next cell height ≥ current cell height.
+        # Use two visited set for tracking cells visited through bfs/dfs from cells near pacific and atlantic separately. Take intersection of these two sets and return.
+
         return self.bfsPacificAtlantic(heights)
         # return self.dfsPacificAtlantic(heights)
 
