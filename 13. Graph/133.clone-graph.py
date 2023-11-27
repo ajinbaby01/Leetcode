@@ -100,6 +100,8 @@ class Node:
 from typing import Optional
 class Solution:
     def cloneGraph(self, node: Optional['Node']) -> Optional['Node']:
+        # Use a hashmap to map old node and new nodes
+        
         # return self.dfsCloneGraph(node)
         return self.bfsCloneGraph(node)
 

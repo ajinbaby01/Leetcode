@@ -60,6 +60,12 @@
 # @lc code=start
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
+        # Use DFS or BFS traversal on graph.
+        # Only continue the traversal if the grid[i][j] == 1.
+        # Otherwise return. Update visited each time.
+        # When bfs/dfs from one cell/vertex is done, increment count and move to next cell.
+        # Repeat for all cells.
+        
         # return self.bfsIslands(grid)
         return self.dfsIslands(grid)
 
@@ -91,8 +97,6 @@ class Solution:
 
         return islands
 
-
-
     def bfsIslands(self, grid):
         rows, cols = len(grid), len(grid[0])
         directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
@@ -112,8 +116,6 @@ class Solution:
                     next_i, next_j = i + direction[0], j + direction[1]
                     if next_i in range(rows) and next_j in range(cols) and grid[next_i][next_j] == "1":
                         queue.append((next_i, next_j))
-
-
 
         for i in range(rows):
             for j in range(cols):
