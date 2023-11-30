@@ -61,6 +61,30 @@
 # @lc code=start
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        # return self.dfsNumCourses(numCourses, prerequisites)
+        return self.bfsKahnAlgorithmNumCourses(numCourses, prerequisites)
+    
+    # Topological Sort from techinterview
+    def bfsKahnAlgorithmNumCourses(self, numCourses, prerequisites):
+        nodes, order, queue = {}, [], deque()
+        for node_id in range(numCourses):
+            nodes[node_id] = { 'in': 0, 'out': set() }
+        for node_id, pre_id in prerequisites:
+            nodes[node_id]['in'] += 1
+            nodes[pre_id]['out'].add(node_id)
+        for node_id in nodes.keys():
+            if nodes[node_id]['in'] == 0:
+                queue.append(node_id)
+        while len(queue):
+            node_id = queue.pop()
+            for outgoing_id in nodes[node_id]['out']:
+                nodes[outgoing_id]['in'] -= 1
+                if nodes[outgoing_id]['in'] == 0:
+                    queue.append(outgoing_id)
+            order.append(node_id)
+        return len(order) == numCourses
+    
+    def dfsNumCourses(self, numCourses, prerequisites):
         if not prerequisites:
             return True
         
