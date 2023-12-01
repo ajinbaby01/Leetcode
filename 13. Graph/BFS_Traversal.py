@@ -18,6 +18,9 @@ def bfs(matrix):
         queue = deque([(i, j)])
 
         while queue:
+            # Changes bfs to iterative dfs
+            # i, j = queue.pop()
+
             i, j = queue.popleft()
             if (
                (i, j) in visited or
