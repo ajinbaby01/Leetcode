@@ -31,9 +31,40 @@ from typing import (
 
 class Solution:
     def count_components(self, n: int, edges: List[List[int]]) -> int:
-        return self.mySolution(n, edges)
+        # return self.mySolution(n, edges)
         # return self.trackParent(n, edges)
-        return self.disjoinSetFindUnion(n, edges)
+        # return self.disjoinSetFindUnion(n, edges)
+        return self.disjoinSetFindUnionWithoutRank(n, edges)
+
+    def disjoinSetFindUnionWithoutRank(self, n, edges):
+        par = list(range(n))
+
+        # Find the parent of node n1
+        def find(n1):
+            # If res is the parent of itself, we reached the top, return res
+            while n1 != par[n1]:
+                n1 = par[n1]
+            return par[n1]
+
+        # Combine the sets/components containing n1 and n2 to form one set/component
+        def union(n1, n2):
+            p1, p2 = find(n1), find(n2)
+
+            # Both nodes have same parent. ie, belong in the same disjoint set/component.
+            # Hence no need to decrement component count.
+            if p1 == p2:
+                return 0
+
+            par[p1] = p2
+            return 1
+
+        # Initially there's n components, ie, n disjoint sets
+        num_of_components = n
+        for u, v in edges:
+            # Whenever we combine two sets/components, we decrement count by 1.
+            # If the nodes to combine belong to the same component, we don't decrement count.
+            num_of_components -= union(u, v)
+        return num_of_components
 
     def disjoinSetFindUnion(self, n, edges):
         par = [i for i in range(n)]
@@ -142,11 +173,11 @@ class Solution:
 
 n = [5, 6, 5, 5, 6]
 edges = [
-    [[0, 1], [1, 2], [3, 4], [0, 2]], # 2
-    [[1, 5], [0, 2], [2, 4], [4, 2], [2, 0], [5, 1]], # 3
-    [[0, 1], [1, 2], [3, 4]], # 2
-    [[0, 1], [1, 2], [2, 3], [3, 4]], # 1
-    [[0, 5], [0, 2], [5, 2], [2, 4], [1, 3]], # 2
+    [[0, 1], [1, 2], [3, 4], [0, 2]],  # 2
+    [[1, 5], [0, 2], [2, 4], [4, 2], [2, 0], [5, 1]],  # 3
+    [[0, 1], [1, 2], [3, 4]],  # 2
+    [[0, 1], [1, 2], [2, 3], [3, 4]],  # 1
+    [[0, 5], [0, 2], [5, 2], [2, 4], [1, 3]],  # 2
 ]
 for i in range(len(n)):
     print(Solution().count_components(n[i], edges[i]))
