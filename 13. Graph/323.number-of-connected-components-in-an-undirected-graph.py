@@ -102,6 +102,15 @@ class Solution:
         return len(count)
 
     def mySolution(self, n, edges):
+        """
+        Keep track of nodes that are not visited.
+        For a node in the not_visited set, perform bfs search.
+        Whenever a node is visited as part of bfs, remove it from set.
+        When bfs is over/queue is empty, one component is found.
+        Perform next bfs on one of the not visited node.
+        Repeat the process until all nodes are visited/not_visited set is empty.
+        """
+
         def build_adjacency_list(n, edges):
             adjacency_list = [[] for _ in range(n)]
             for u, v in edges:
