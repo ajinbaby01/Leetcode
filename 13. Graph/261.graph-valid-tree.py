@@ -61,11 +61,17 @@ class Solution:
             #         return False
             # return True
             
+            # Node visited again = Cycle detected
             if node in visited:
                 return False
             visited.add(node)
 
             for neighbor in adjacency_list[node]:
+                # Say there's edges [0, 1] and [1, 0].
+                # Start dfs from 0, reach 1
+                # Dfs from 1, reach 0 again.
+                # If the condition is not used, then when we will again dfs the node from where we came.
+                # So we skip the node from where we came from (prev)
                 if neighbor == prev:
                     continue
                 if not dfs(neighbor, node):
@@ -73,8 +79,11 @@ class Solution:
             return True
 
         if dfs(0, -1):
+            # If len(visited) != n, then it means it is disconnected.
+            # Else it is connected.
             return len(visited) == n
         else:
+            # Cycle detected
             return False
 
 
