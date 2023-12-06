@@ -31,7 +31,7 @@ from typing import (
 
 class Solution:
     def count_components(self, n: int, edges: List[List[int]]) -> int:
-        # return self.mySolution(n, edges)
+        return self.mySolution(n, edges)
         # return self.trackParent(n, edges)
         return self.disjoinSetFindUnion(n, edges)
 
@@ -126,11 +126,12 @@ class Solution:
         while len(not_visited) != 0:
             node = not_visited.pop()
             q.append(node)
+            not_visited.add(node)
             while q:
                 node = q.popleft()
                 if node in not_visited:
                     not_visited.remove(node)
-                q.extend(adjacency_list[node])
+                    q.extend(adjacency_list[node])
             count += 1
         return count
 
@@ -140,7 +141,7 @@ class Solution:
 n = [5, 6, 5, 5, 6]
 edges = [
     [[0, 1], [1, 2], [3, 4], [0, 2]],
-    [[1, 5], [0, 2], [2, 4]],
+    [[1, 5], [0, 2], [2, 4], [4, 2], [2, 0], [5, 1]],
     [[0, 1], [1, 2], [3, 4]],
     [[0, 1], [1, 2], [2, 3], [3, 4]],
     [[0, 5], [0, 2], [5, 2], [2, 4], [1, 3]],
