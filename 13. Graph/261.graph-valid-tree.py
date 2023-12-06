@@ -26,7 +26,30 @@ There are no self-loops or repeated edges.
 
 class Solution:
     def valid_tree(self, n, edges):
-        return self.traversal(n, edges)
+        # return self.traversal(n, edges)
+        return self.findUnion(n, edges)
+
+    def findUnion(self, n, edges):
+        par = list(range(n))
+
+        # Find parent of n1
+        def find(n1):
+            while n1 != par[n1]:
+                n1 = par[n1]
+            return par[n1]
+
+        for u, v in edges:
+            p1, p2 = find(u), find(v)
+            if p1 == p2:
+                # Cycle Detected
+                return False
+            # Union without using rank
+            par[p1] = p2
+            # Decrement component count
+            n -= 1
+        # Graph is connected/Tree if number of components is 1.
+        # Else graph is disconnected (more than one component) and is not a tree.
+        return n == 1
 
     def traversal(self, n, edges):
         # Graph is tree if it is connected and acyclic.
@@ -60,7 +83,7 @@ class Solution:
             #     if not dfs(neighbor, node):
             #         return False
             # return True
-            
+
             # Node visited again = Cycle detected
             if node in visited:
                 return False
@@ -77,6 +100,8 @@ class Solution:
                 if not dfs(neighbor, node):
                     return False
             return True
+
+        # return dfs(0, -1) and len(visited) == n
 
         if dfs(0, -1):
             # If len(visited) != n, then it means it is disconnected.
