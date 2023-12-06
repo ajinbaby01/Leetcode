@@ -108,7 +108,8 @@ class Solution:
                     next_i, next_j = i + dr, j + dc
                     if (
                         next_i in range(rows) and
-                        next_j in range(cols)
+                        next_j in range(cols) and
+                        (next_i, next_j) not in visited
                     ):
                         if mat[next_i][next_j] == 1:
                             q.append((next_i, next_j))
