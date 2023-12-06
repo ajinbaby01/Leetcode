@@ -115,6 +115,8 @@ class Solution:
             adjacency_list = [[] for _ in range(n)]
             for u, v in edges:
                 adjacency_list[u].append(v)
+                # Not necessary as code will work without it
+                adjacency_list[v].append(u)
             return adjacency_list
 
         adjacency_list = build_adjacency_list(n, edges)
@@ -140,11 +142,11 @@ class Solution:
 
 n = [5, 6, 5, 5, 6]
 edges = [
-    [[0, 1], [1, 2], [3, 4], [0, 2]],
-    [[1, 5], [0, 2], [2, 4], [4, 2], [2, 0], [5, 1]],
-    [[0, 1], [1, 2], [3, 4]],
-    [[0, 1], [1, 2], [2, 3], [3, 4]],
-    [[0, 5], [0, 2], [5, 2], [2, 4], [1, 3]],
+    [[0, 1], [1, 2], [3, 4], [0, 2]], # 2
+    [[1, 5], [0, 2], [2, 4], [4, 2], [2, 0], [5, 1]], # 3
+    [[0, 1], [1, 2], [3, 4]], # 2
+    [[0, 1], [1, 2], [2, 3], [3, 4]], # 1
+    [[0, 5], [0, 2], [5, 2], [2, 4], [1, 3]], # 2
 ]
 for i in range(len(n)):
     print(Solution().count_components(n[i], edges[i]))
