@@ -63,37 +63,41 @@ class Solution:
 
             return edges, adjacency_list
 
+        def topological_sort(edges, adjacency_list):
+            indegree, order, q, visited = {}, [], deque(), set()
+
+            for u, v in edges:
+                indegree[u] = 0
+                indegree[v] = 0
+
+            for u, v in edges:
+                indegree[v] += 1
+
+            for node, ind in indegree.items():
+                if ind == 0:
+                    q.append(node)
+
+            while q:
+                node = q.popleft()
+                visited.add(node)
+                order.append(node)
+                for neighbor in adjacency_list[node]:
+                    indegree[neighbor] -= 1
+                    if indegree[neighbor] == 0:
+                        q.append(neighbor)
+
+            return order
+
         edges, adjacency_list = build_adjacency_list(words)
 
         num_nodes = set()
-
         for u, v in edges:
             num_nodes.add(u)
             num_nodes.add(v)
-
         num_nodes = len(num_nodes)
 
-        indegree, order, q, visited = {}, [], deque(), set()
+        order = topological_sort(edges, adjacency_list)
 
-        for u, v in edges:
-            indegree[u] = 0
-            indegree[v] = 0
-
-        for u, v in edges:
-            indegree[v] += 1
-
-        for node, ind in indegree.items():
-            if ind == 0:
-                q.append(node)
-
-        while q:
-            node = q.popleft()
-            visited.add(node)
-            order.append(node)
-            for neighbor in adjacency_list[node]:
-                indegree[neighbor] -= 1
-                if indegree[neighbor] == 0:
-                    q.append(neighbor)
         return ''.join(order) if len(order) == num_nodes else -1
 
 words = [
