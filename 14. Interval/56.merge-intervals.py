@@ -55,9 +55,10 @@ class Solution:
         def merge_overlapping_intervals(a, b):
             return [min(a[0], b[0]), max(a[1], b[1])]
 
-        intervals.sort()
+        # intervals.sort()
         res = []
-        for interval in intervals:
+        # for interval in intervals:
+        for interval in sorted(intervals, key=lambda x: x[0]):
             if res and is_overlap(res[-1], interval):
                 merge = merge_overlapping_intervals(res[-1], interval)
                 res.pop()
