@@ -50,7 +50,9 @@
 class Solution:
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
         def is_overlap(a, b):
-            return a[0] <= b[1] and b[0] <= a[1]
+            # Only need to check one case as we are sorting the intervals
+            # return a[0] <= b[1] and b[0] <= a[1]
+            return b[0] <= a[1]
 
         def merge_overlapping_intervals(a, b):
             return [min(a[0], b[0]), max(a[1], b[1])]
