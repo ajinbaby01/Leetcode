@@ -62,9 +62,11 @@ class Solution:
         # for interval in intervals:
         for interval in sorted(intervals, key=lambda x: x[0]):
             if res and is_overlap(res[-1], interval):
-                merge = merge_overlapping_intervals(res[-1], interval)
-                res.pop()
-                res.append(merge)
+                # merge = merge_overlapping_intervals(res[-1], interval)
+                # # res.pop()
+                # # res.append(merge)
+                # res[-1][1] = merge[1]
+                res[-1][1] = max(res[-1][1], interval[1])
             else:
                 res.append(interval)
         return res
