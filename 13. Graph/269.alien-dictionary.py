@@ -64,7 +64,7 @@ class Solution:
             return edges, adjacency_list
 
         def topological_sort(edges, adjacency_list):
-            indegree, order, q, visited = {}, [], deque(), set()
+            indegree, order, q = {}, [], deque()
 
             for u, v in edges:
                 indegree[u] = 0
@@ -79,13 +79,11 @@ class Solution:
 
             while q:
                 node = q.popleft()
-                visited.add(node)
                 order.append(node)
                 for neighbor in adjacency_list[node]:
                     indegree[neighbor] -= 1
                     if indegree[neighbor] == 0:
                         q.append(neighbor)
-
             return order
 
         edges, adjacency_list = build_adjacency_list(words)
