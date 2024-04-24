@@ -69,7 +69,8 @@ class Solution:
                 r -= 1
             elif s[l].lower() != s[r].lower():
                 return False
-            l += 1
-            r -= 1
+            else:
+                l += 1
+                r -= 1
         return True
 # @lc code=end
