@@ -47,6 +47,8 @@
 
 # @lc code=start
 class Solution:
+    # iterate through the nums and for every number which is not in the middle of a sequence (num - 1 not in nums)
+    # start from that number incrementing by one and find a sequence
     def longestConsecutive(self, nums: List[int]) -> int:
         nums = set(nums)
         longest = 0
@@ -57,5 +59,6 @@ class Solution:
                     y += 1
                 longest = max(longest, y-num)
         return longest
+    #Time : O(n)
 
 # @lc code=end
