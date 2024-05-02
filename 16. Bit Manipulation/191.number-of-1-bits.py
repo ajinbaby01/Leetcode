@@ -74,6 +74,7 @@ class Solution:
         return self.bitManipulation2(n)
 
     def bitManipulation2(self, n: int) -> int:
+        # Brian Kernighan’s algorithm
         count = 0
         while n != 0:
             n = n & (n - 1)
@@ -81,7 +82,9 @@ class Solution:
             # count the number of times 1 is deleted until n becomes 0
             count += 1
         return count
-    # Time: O(k) where k = number of set bits
+    # Time: O(logn)
+    # In worst case scenario, all bits will be set and you need to unset all bits to count it.
+    # Since an integer n has log(n) bits, time is O(logn)
 
     def bitManipulation1(self, n: int) -> int:
         count = 0
