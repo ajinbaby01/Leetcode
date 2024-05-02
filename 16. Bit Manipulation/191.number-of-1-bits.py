@@ -81,23 +81,26 @@ class Solution:
             # count the number of times 1 is deleted until n becomes 0
             count += 1
         return count
+    # Time: O(k) where k = number of set bits
 
     def bitManipulation1(self, n: int) -> int:
         count = 0
-        while n != 0:
+        while n != 0: # Halves n until n reaches 0. Halving means O(logn)
             count = count + (n & 1)
             # (n & 1) = 1 if rightmost bit is 1 and 0 if rightmost bit is 0 (n is considered in binary)
-            n = n >> 1
+            n = n >> 1 # This process halves n
             # Right shift the number to remove the rightmost bit
         return count
+    # Time: O(logn)
 
     def convertToBinaryString(self, n: int) -> int:
-        binary = bin(n)
+        binary = bin(n) # log(n)
         count = 0
         for digit in binary:
             if digit == "1":
                 count += 1
         return count
+    # Time: O(logn)
 
 
 # @lc code=end
