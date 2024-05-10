@@ -155,12 +155,10 @@ class Solution:
                 headB = headB.next
                 lenB -= 1
 
-        while headA is not None:
-            if headA is headB:
-                return headA
+        while headA is not headB:
             headA = headA.next
             headB = headB.next
-        return None
+        return headA
     # Time: O(A + B), Space: O(1)
 
     def hashing(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
