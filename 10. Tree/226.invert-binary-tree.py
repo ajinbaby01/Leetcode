@@ -56,13 +56,44 @@
 #         self.right = right
 class Solution:
     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        # return self.recursiveDFS(root)
+        # return self.iterativeDFS(root)
+        return self.BFS(root)
+
+    def recursiveDFS(self, root):
         if not root:
             return
         # root.left, root.right = root.right, root.left
         # self.invertTree(root.right)
         # self.invertTree(root.left)
-
         root.left, root.right = self.invertTree(root.right), self.invertTree(root.left)
+        return root
 
+    def iterativeDFS(self, root):
+        if not root:
+            return
+
+        stack = [root]
+        while stack:
+            node = stack.pop()
+            node.right, node.left = node.left, node.right
+            if node.right:
+                stack.append(node.right)
+            if node.left:
+                stack.append(node.left)
+        return root
+
+    def BFS(self, root):
+        if not root:
+            return
+
+        queue = deque([root])
+        while queue:
+            node = queue.popleft()
+            node.right, node.left = node.left, node.right
+            if node.right:
+                queue.append(node.right)
+            if node.left:
+                queue.append(node.left)
         return root
 # @lc code=end
