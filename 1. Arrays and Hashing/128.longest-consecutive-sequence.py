@@ -61,4 +61,37 @@ class Solution:
         return longest
     #Time : O(n)
 
+
+# Return longest sequence in golang
+# func longestConsecutive() []int {
+# 	nums := []int{0, 3, 7, 2, 5, 8, 4, 6, 0, 1}
+# 	longest := 0
+# 	longestStart := 0
+# 	if len(nums) == 0 {
+# 		return []int{}
+# 	}
+
+# 	m := make(map[int]bool)
+# 	for _, v := range nums {
+# 		m[v] = true
+# 	}
+
+# 	for _, v := range nums {
+# 		if !m[v-1] {
+# 			current := v
+# 			for m[current] {
+# 				current++
+# 			}
+# 			if current-v > longest {
+# 				longestStart = v
+# 				longest = current - v
+# 			}
+# 		}
+# 	}
+# 	longestSeq := make([]int, longest)
+# 	for i := 0; i < longest; i++ {
+# 		longestSeq[i] = longestStart + i
+# 	}
+# 	return longestSeq
+# }
 # @lc code=end
