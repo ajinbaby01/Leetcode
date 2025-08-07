@@ -71,7 +71,6 @@
 
 # @lc code=start
 class MyStack:
-
     # def __init__(self):
     #     self.queue = collections.deque()
 
@@ -115,8 +114,64 @@ class MyStack:
 
     def empty(self) -> bool:
         return not self.queue
+
     # O(1) for both push and pop
-    
+
+
+# Golang
+# import (
+# 	"container/list"
+# 	"fmt"
+# )
+
+# // MyStack implements a LIFO stack using one FIFO queue.
+# type MyStack struct {
+# 	q *list.List // underlying queue
+# }
+
+# /* ---------- core operations ---------- */
+
+# // Push adds x to the stack (costly: O(n))
+# func (s *MyStack) Push(x int) {
+# 	s.q.PushBack(x)              // enqueue new element
+# 	for i := 0; i < s.q.Len()-1; i++ { // rotate previous elements
+# 		front := s.q.Front()
+# 		s.q.Remove(front)
+# 		s.q.PushBack(front.Value)
+# 	}
+# }
+
+# // Pop removes-and-returns the top element (amortized O(1))
+# func (s *MyStack) Pop() int {
+# 	front := s.q.Front()
+# 	s.q.Remove(front)
+# 	return front.Value.(int)
+# }
+
+# // Top returns, but does not remove, the current top (O(1))
+# func (s *MyStack) Top() int {
+# 	return s.q.Front().Value.(int)
+# }
+
+# // Empty reports whether the stack has no elements (O(1))
+# func (s *MyStack) Empty() bool {
+# 	return s.q.Len() == 0
+# }
+
+# /* ---------- demo ---------- */
+# func NewStack() *MyStack { return &MyStack{q: list.New()} }
+
+# func main() {
+# 	st := NewStack()
+# 	st.Push(10)
+# 	st.Push(20)
+# 	st.Push(30) // stack = [30 20 10]
+
+# 	fmt.Println(st.Top()) // 30
+# 	fmt.Println(st.Pop()) // 30
+# 	fmt.Println(st.Top()) // 20
+# 	fmt.Println(st.Empty()) // false
+# }
 
 # Your MyStack object will be instantiated and called as such:
 # obj = MyStack()

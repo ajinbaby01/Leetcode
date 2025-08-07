@@ -161,6 +161,50 @@ class MyQueue:
         return False
     # Enqueue(Push): O(1). Deque(Pop): O(1) amortized
 
+# Golang
+# type Queue struct {
+# 	s1 []int
+# 	s2 []int
+# }
+
+# func NewQueue() *Queue {
+# 	return &Queue{
+# 		s1: []int{},
+# 		s2: []int{},
+# 	}
+# }
+
+# func (q *Queue) Enqueue(val int) {
+# 	q.s1 = append(q.s1, val)
+# }
+
+# func (q *Queue) Dequeue() int {
+# 	var val int
+# 	if len(q.s2) != 0 {
+# 		val = q.s2[len(q.s2)-1]
+# 		q.s2 = q.s2[:len(q.s2)-1]
+# 		return val
+# 	}
+
+# 	for len(q.s1) != 0 {
+# 		q.s2 = append(q.s2, q.s1[len(q.s1) - 1])
+# 		q.s1 = q.s1[:len(q.s1) - 1]
+# 	}
+
+# 	val = q.s2[len(q.s2)-1]
+# 	q.s2 = q.s2[:len(q.s2)-1]
+# 	return val
+# }
+
+# func main() {
+# 	q := NewQueue()
+# 	q.Enqueue(5)
+# 	q.Enqueue(10)
+# 	fmt.Println(q.Dequeue())
+# 	q.Enqueue(20)
+# 	fmt.Println(q.Dequeue())
+# 	fmt.Println(q.Dequeue())
+# }
 # Your MyQueue object will be instantiated and called as such:
 # obj = MyQueue()
 # obj.push(x)
