@@ -71,5 +71,31 @@ class Solution:
                 return [i, temp[complement]]
             temp[nums[i]] = i
 
+# Two sum with multiple answer in golang
+# func twoSum() [][2]int {
+# 	nums := []int{2, 4, 3, 5, 6, -1, 1, 7, 2}
+# 	target := 6
+# 	seen := make(map[int]bool)
+# 	result := [][2]int{}
+# 	usedPair := make(map[[2]int]bool)
+
+# 	for _, num := range nums {
+# 		complement := target - num
+# 		if seen[complement] {
+# 			a, b := num, complement
+# 			if a > b {
+# 				a, b = b, a
+# 			}
+# 			pair := [2]int{a, b}
+# 			if !usedPair[pair] {
+# 				result = append(result, pair)
+# 				usedPair[pair] = true
+# 			}
+# 		}
+# 		seen[num] = true
+# 	}
+# 	return result
+# }
+
 
 # @lc code=end
