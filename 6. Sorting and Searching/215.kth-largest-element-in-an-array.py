@@ -48,4 +48,63 @@ class Solution:
         for _ in range(k):
             answer = -heappop(minheap)
         return answer
+
+#Golang
+# package main
+
+# import (
+# 	"container/heap"
+# 	"fmt"
+# )
+
+# type MinHeap []int
+
+# // Len implements heap.Interface.
+# func (m MinHeap) Len() int {
+# 	return len(m)
+# }
+
+# // Less implements heap.Interface.
+# func (m MinHeap) Less(i int, j int) bool {
+# 	return m[i] < m[j]
+# }
+
+# // Pop implements heap.Interface.
+# func (m *MinHeap) Pop() any {
+# 	old := *m
+# 	n := len(old)
+# 	x := old[n-1]
+# 	*m = old[:n-1]
+# 	return x
+# }
+
+# // Push implements heap.Interface.
+# func (m *MinHeap) Push(x any) {
+# 	*m = append(*m, x.(int))
+# }
+
+# // Swap implements heap.Interface.
+# func (m MinHeap) Swap(i int, j int) {
+# 	m[i], m[j] = m[j], m[i]
+# }
+
+# func kthLargest(nums []int, k int) int {
+# 	h := &MinHeap{}
+# 	heap.Init(h)
+# 	for _, num := range nums {
+# 		heap.Push(h, num)
+# 		if h.Len() > k {
+# 			heap.Pop(h)
+# 		}
+# 	}
+# 	return (*h)[0]
+# }
+
+# func main() {
+# 	arr := []int{3, 2, 1, 5, 6, 4}
+# 	k := 2
+# 	result := kthLargest(arr, k)
+# 	fmt.Println("Kth largest element:", result)
+# }
+
 # @lc code=end
