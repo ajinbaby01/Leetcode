@@ -41,22 +41,21 @@
 # @lc code=start
 class Solution:
     def singleNonDuplicate(self, nums: List[int]) -> int:
-        left, right = 1, len(nums) - 2
-        if len(nums) == 1:
-            return nums[0]
-        elif nums[0] != nums[1]:
-            return nums[0]
-        elif nums[-1] != nums[-2]:
-            return nums[-1]
+        left, right = 0, len(nums) - 1
 
-        while left <= right:
+        while left < right:
             mid = (left + right) // 2
-            if nums[mid - 1] != nums[mid] and nums[mid] != nums[mid + 1]:
-                return nums[mid]
-            if (nums[mid] == nums[mid - 1] and mid % 2 == 1) or \
-                (nums[mid] == nums[mid + 1] and mid % 2 == 0 ):
-                left = mid + 1
+            # Make sure mid is even so its pair is mid ^ 1 (flip last bit)
+            if mid % 2 == 1:
+                mid -= 1
+
+            # If pair is correct, move to right half
+            if nums[mid] == nums[mid + 1]:
+                left = mid + 2
             else:
-                right = mid - 1
+                right = mid
+
+        return nums[left]
+
 
 # @lc code=end
