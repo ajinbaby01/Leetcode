@@ -40,6 +40,9 @@
 
 # @lc code=start
 class Solution:
+    # In a sorted array where all elements appear twice except for one:
+    # Before the unique element, the first occurrence of a pair is at an even index, and the second is at an odd index.
+    # After the unique element, this pattern is disrupted.
     def singleNonDuplicate(self, nums: List[int]) -> int:
         left, right = 0, len(nums) - 1
 
