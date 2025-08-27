@@ -52,10 +52,34 @@
 
 // @lc code=start
 func containsNearbyDuplicate(nums []int, k int) bool {
+	// return storeIndices(nums, k)
+	return slidingWindow(nums, k)
+}
+
+func slidingWindow(nums []int, k int) bool {
+	seen := make(map[int]struct{}, len(nums))
+	for i, num := range nums {
+		if _, ok := seen[num]; ok {
+			return true
+		}
+
+		seen[num] = struct{}{}
+
+		if i >= k {
+			delete(seen, nums[i-k])
+		}
+	}
+	return false
+}
+// Store only k elements in the map
+// If current number is found in map,
+// it means there is a duplicate within k window
+
+func storeIndices(nums []int, k int) bool {
 	seen := make(map[int]int, len(nums))
-    for i, num := range nums {
+	for i, num := range nums {
 		if j, ok := seen[num]; ok {
-			if math.Abs(float64(i - j)) <= float64(k) {
+			if math.Abs(float64(i-j)) <= float64(k) {
 				return true
 			}
 		}
