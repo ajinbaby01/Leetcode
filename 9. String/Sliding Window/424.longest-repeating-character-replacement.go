@@ -57,7 +57,8 @@ func characterReplacement(s string, k int) int {
 		char := byte(c)
 		hashMap[char]++
 		windowLen := r - l + 1
-		maxf = max(hashMap[char], maxf	)
+		// maxf := findMaxFreq(hashMap)
+		maxf = max(hashMap[char], maxf) // Time: O(n)
 		if windowLen-maxf <= k {
 			res = max(res, windowLen)
 		} else {
@@ -67,4 +68,15 @@ func characterReplacement(s string, k int) int {
 	}
 	return res
 }
+
+// Find the max frequency in the current window
+func findMaxFreq(hashMap map[byte]int) int {
+	maxf := 0
+	for _, v := range hashMap {
+		maxf = max(maxf, v)
+	}
+	return maxf
+}
+// Time: O(26n)
+
 // @lc code=end
