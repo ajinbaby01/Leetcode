@@ -46,22 +46,52 @@
  */
 
 // @lc code=start
+package main
+
 func checkInclusion(s1 string, s2 string) bool {
 	if len(s1) > len(s2) {
 		return false
 	}
 
 	// return bruteForceSorting(s1, s2)
-	return slidingWindow(s1, s2)
+	// return slidingWindowUsingHash(s1, s2)
+	return slidingWindowUsingArray(s1, s2)
 }
 
-func slidingWindow(s1, s2 string) bool {
-	h1 := make(map[string]int)
-	h2 := make(map[string]int)
+func slidingWindowUsingArray(s1, s2 string) bool {
+	var h1, h2 [26]int
 
 	for i := 0; i < len(s1); i++ {
-		h1[string(s1[i])]++
-		h2[string(s2[i])]++
+		h1[s1[i] - 'a']++
+		h2[s2[i] - 'a']++
+	}
+
+	if h1 == h2 {
+		return true
+	}
+
+	left := 0
+	for right := len(s1); right < len(s2); right++ {
+		h2[s2[left] - 'a']--
+		h2[s2[right] - 'a']++
+		left++
+
+		if h1 == h2 {
+			return true
+		}
+	}
+
+	return false
+}
+// Time: O(n)
+
+func slidingWindowUsingHash(s1, s2 string) bool {
+	h1 := make(map[byte]int)
+	h2 := make(map[byte]int)
+
+	for i := 0; i < len(s1); i++ {
+		h1[s1[i]]++
+		h2[s2[i]]++
 	}
 
 	left := 0
@@ -75,15 +105,16 @@ func slidingWindow(s1, s2 string) bool {
 			break
 		}
 
-		h2[string(s2[left])]--
+		h2[s2[left]]--
 		left++
 		right++
-		h2[string(s2[right])]++
+		h2[s2[right]]++
 	}
 	return false
 }
+// Time: O(26n)
 
-func compareMap(h1, h2 map[string]int) bool {
+func compareMap(h1, h2 map[byte]int) bool {
 	for char, count := range h1 {
 		if h2[char] != count {
 			return false
