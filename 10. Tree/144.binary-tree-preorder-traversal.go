@@ -1,19 +1,19 @@
 /*
- * @lc app=leetcode id=94 lang=golang
+ * @lc app=leetcode id=144 lang=golang
  *
- * [94] Binary Tree Inorder Traversal
+ * [144] Binary Tree Preorder Traversal
  *
- * https://leetcode.com/problems/binary-tree-inorder-traversal/description/
+ * https://leetcode.com/problems/binary-tree-preorder-traversal/description/
  *
  * algorithms
- * Easy (75.57%)
- * Likes:    13295
- * Dislikes: 759
- * Total Accepted:    2.5M
- * Total Submissions: 3.3M
+ * Easy (69.79%)
+ * Likes:    8573
+ * Dislikes: 227
+ * Total Accepted:    2.2M
+ * Total Submissions: 2.9M
  * Testcase Example:  '[1,null,2,3]'
  *
- * Given the root of a binary tree, return the inorder traversal of its nodes'
+ * Given the root of a binary tree, return the preorder traversal of its nodes'
  * values.
  *
  *
@@ -21,20 +21,39 @@
  *
  *
  * Input: root = [1,null,2,3]
- * Output: [1,3,2]
+ *
+ * Output: [1,2,3]
+ *
+ * Explanation:
+ *
+ *
  *
  *
  * Example 2:
  *
  *
- * Input: root = []
- * Output: []
+ * Input: root = [1,2,3,4,5,null,8,null,null,6,7,9]
+ *
+ * Output: [1,2,4,5,6,7,3,8,9]
+ *
+ * Explanation:
+ *
+ *
  *
  *
  * Example 3:
  *
  *
+ * Input: root = []
+ *
+ * Output: []
+ *
+ *
+ * Example 4:
+ *
+ *
  * Input: root = [1]
+ *
  * Output: [1]
  *
  *
@@ -48,6 +67,7 @@
  *
  *
  * Follow up: Recursive solution is trivial, could you do it iteratively?
+ *
  */
 
 // @lc code=start
@@ -59,42 +79,41 @@
  *     Right *TreeNode
  * }
  */
-func inorderTraversal(root *TreeNode) []int {
+func preorderTraversal(root *TreeNode) []int {
 	// return recursive(root)
 	return iterative(root)
-
 }
 
 func iterative(root *TreeNode) []int {
+	var preorder []int
 	var stack []*TreeNode
-	var inorder []int
 	// As long as you either have nodes left to visit (root != nil) or pending work in the stack (len(stack) > 0), keep looping.
 	for root != nil || len(stack) != 0 {
 		// Simulates calling dfs(root.left) within dfs(root)
 		for root != nil {
+			preorder = append(preorder, root.Val)
 			stack = append(stack, root)
 			root = root.Left
 		}
 		root = stack[len(stack)-1]
 		stack = stack[:len(stack)-1]
-		inorder = append(inorder, root.Val)
 		root = root.Right
 	}
-	return inorder
+	return preorder
 }
 
 func recursive(root *TreeNode) []int {
-	var inorder []int
 	var dfs func(root *TreeNode)
+	var preorder []int
 	dfs = func(root *TreeNode) {
 		if root != nil {
+			preorder = append(preorder, root.Val)
 			dfs(root.Left)
-			inorder = append(inorder, root.Val)
 			dfs(root.Right)
 		}
 	}
 	dfs(root)
-	return inorder
+	return preorder
 }
 
 // @lc code=end
