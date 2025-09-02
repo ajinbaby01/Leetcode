@@ -102,6 +102,26 @@ func iterative(root *TreeNode) []int {
 	return preorder
 }
 
+func iterative(root *TreeNode) []int {
+	if root == nil {
+		return []int{}
+	}
+	var preorder []int
+	stack := []*TreeNode{root}
+	for len(stack) != 0 {
+		node := stack[len(stack)-1]
+		stack = stack[:len(stack)-1]
+		preorder = append(preorder, node.Val)
+		if node.Right != nil {
+			stack = append(stack, node.Right)
+		}
+		if node.Left != nil {
+			stack = append(stack, node.Left)
+		}
+	}
+	return preorder
+}
+
 func recursive(root *TreeNode) []int {
 	var dfs func(root *TreeNode)
 	var preorder []int

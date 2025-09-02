@@ -52,7 +52,7 @@
 #         self.right = right
 class Solution:
     def maxDepth(self, root: Optional[TreeNode]) -> int:
-        # return self.recursiveSolution(root)
+        # return self.recursiveDFS(root)
         return self.iterativeDFS(root)
 
     def recursiveDFS(self, root):
@@ -60,7 +60,7 @@ class Solution:
             return 0
         return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))
 
-    def iterativeSolution(self, root):
+    def iterativeDFS(self, root):
         if not root:
             return 0
 
