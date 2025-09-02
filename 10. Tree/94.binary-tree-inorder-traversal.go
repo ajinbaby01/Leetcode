@@ -60,7 +60,9 @@
  * }
  */
 func inorderTraversal(root *TreeNode) []int {
-	// return recursive(root)
+	// var inorder []int
+	// recursive(root, &inorder)
+	// return inorder
 	return iterative(root)
 
 }
@@ -83,18 +85,25 @@ func iterative(root *TreeNode) []int {
 	return inorder
 }
 
-func recursive(root *TreeNode) []int {
-	var inorder []int
-	var dfs func(root *TreeNode)
-	dfs = func(root *TreeNode) {
-		if root != nil {
-			dfs(root.Left)
-			inorder = append(inorder, root.Val)
-			dfs(root.Right)
-		}
+func recursive(root *TreeNode, inorder *[]int) {
+	if root != nil {
+		recursive(root.Left, inorder)
+		*inorder = append(*inorder, root.Val)
+		recursive(root.Right, inorder)
 	}
-	dfs(root)
-	return inorder
 }
 
+// func recursive(root *TreeNode) []int {
+// 	var inorder []int
+// 	var dfs func(root *TreeNode)
+// 	dfs = func(root *TreeNode) {
+// 		if root != nil {
+// 			dfs(root.Left)
+// 			inorder = append(inorder, root.Val)
+// 			dfs(root.Right)
+// 		}
+// 	}
+// 	dfs(root)
+// 	return inorder
+// }
 // @lc code=end

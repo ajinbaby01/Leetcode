@@ -63,6 +63,8 @@ func levelOrder(root *TreeNode) [][]int {
 	}
 	q := []*TreeNode{root}
 	var levelOrder [][]int
+	// Level order traversal can be done with only one for loop
+	// The reason for the inner loop is to construct a slice with only elements in a single level
 	for len(q) != 0 {
 		qLen := len(q)
 		level := []int{}
