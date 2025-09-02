@@ -93,7 +93,8 @@ class Solution:
             return False
 
         # if root is balanced, check if both subtrees are balanced
-        return (self.isBalanced(root.left) and self.isBalanced(root.right))
+        # because a root can be balanced but the subtree may not be
+        return (self.recursiveIsBalanced(root.left) and self.recursiveIsBalanced(root.right))
     # Time: O(n^2)
 
     def depth(self, root):
