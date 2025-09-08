@@ -45,6 +45,7 @@
 # @lc code=start
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        # Hashing is not needed. Check go code
         def hashstr(string):
             sorted_string = ''.join(sorted(string))
             # anagrams are the same when sorted

@@ -44,45 +44,41 @@
 
 // @lc code=start
 func groupAnagrams(strs []string) [][]string {
-	// return groupByHash(strs)
-    return countingFrequency(strs)
+	// return groupBySort(strs)
+	return countingFrequency(strs)
 }
 
 func countingFrequency(strs []string) [][]string {
-    countMap := make(map[[26]int][]string)
-    for _, s := range strs {
-        var count [26]int
-        for _, c := range s {
-            count[c - 'a']++
-        }
-        countMap[count] = append(countMap[count], s)
-    }
-    groups := make([][]string, 0, len(countMap))
+	countMap := make(map[[26]int][]string)
+	for _, s := range strs {
+		var count [26]int
+		for _, c := range s {
+			count[c-'a']++
+		}
+		countMap[count] = append(countMap[count], s)
+	}
+	groups := make([][]string, 0, len(countMap))
 	for _, v := range countMap {
 		groups = append(groups, v)
 	}
 	return groups
 }
 
-func groupByHash(strs []string) [][]string {
-	hashMap := make(map[uint32][]string)
-	hashFn := func(s string) uint32 {
-		h := fnv.New32a()
-		h.Write([]byte(s))
-		return h.Sum32()
-	}
+func groupBySort(strs []string) [][]string {
+	m := make(map[string][]string)
 	for _, s := range strs {
-		splitStr := strings.Split(s, "")
-        sort.Strings(splitStr)
-        tempStr := strings.Join(splitStr, "")
-		strHash := hashFn(tempStr)
-		hashMap[strHash] = append(hashMap[strHash], s)
+		b := []byte(s)
+
+		sort.Slice(b, func(i int, j int) bool {
+			return b[i] < b[j]
+		})
+		key := string(b)
+		m[key] = append(m[key], s)
 	}
-	groups := make([][]string, 0, len(hashMap))
-	for _, v := range hashMap {
+	groups := make([][]string, 0, len(m))
+	for _, v := range m {
 		groups = append(groups, v)
 	}
 	return groups
 }
-
 // @lc code=end
