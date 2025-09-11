@@ -44,11 +44,11 @@
 # @lc code=start
 class Solution:
     def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
-        answer = []
-        while matrix:
-            answer.extend(matrix.pop(0))
-            matrix = [*zip(*matrix)][::-1]
-        return answer
+        # answer = []
+        # while matrix:
+        #     answer.extend(matrix.pop(0))
+        #     matrix = [*zip(*matrix)][::-1]
+        # return answer
 
         answer = []
         row, col = len(matrix), len(matrix[0])
@@ -72,7 +72,7 @@ class Solution:
             for i in range(bottom, top - 1, -1):
                 answer.append(matrix[i][left])
             left += 1
-            
+
         for row in range(top, bottom+1):
             for col in range(left, right+1):
                 answer.append(matrix[row][col])
