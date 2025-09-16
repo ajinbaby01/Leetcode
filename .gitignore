@@ -212,3 +212,4 @@ pyrightconfig.json
 test.py
 out.py
 output.txt
+test/
