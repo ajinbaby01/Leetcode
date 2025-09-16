@@ -47,6 +47,7 @@ class Solution:
         # return self.inBuiltCounter(nums)
         return self.optimalSolution(nums)
 
+    # Moore’s Voting Algorithm:
     def optimalSolution(self, nums: List[int]) -> int:
         # Count of the answer will always exceed the total count of other number.
         # Hence, when count value ultimately reaches 0, it will be because the answer is num.
