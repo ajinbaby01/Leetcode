@@ -48,7 +48,6 @@ func majorityElement(nums []int) int {
 	for i := 1; i < len(nums); i++ {
 		if res == nums[i] {
 			count++
-			continue
 		} else {
 			if count == 0 {
 				res = nums[i]
