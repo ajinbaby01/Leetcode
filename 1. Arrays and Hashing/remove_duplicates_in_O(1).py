@@ -11,6 +11,7 @@ class Solution:
         return ans
     # Time: O(n), Space: O(n)
 
+    # Only works for sorted array
     def inPlace(self, arr: list) -> list:
         j = 0  # points to the previous unique element
         for i in range(1, len(arr)):
