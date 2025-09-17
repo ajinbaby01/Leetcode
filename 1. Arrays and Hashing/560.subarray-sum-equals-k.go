@@ -39,7 +39,9 @@
  */
 
 // @lc code=start
-// Refer longest-subarray-with-given-sum-k first
+/*
+Refer longest-subarray-with-given-sum-k first
+*/
 /*
 1. What sumFrequencyMap represents
 At any point, sumFrequencyMap[S] = number of indices i where prefix sum = S.

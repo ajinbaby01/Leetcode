@@ -77,39 +77,4 @@ class Solution:
             for col in range(left, right+1):
                 answer.append(matrix[row][col])
         return answer
-
-# Golang
-# func spiralOrder(matrix [][]int) []int {
-# 	top, bottom := 0, len(matrix)-1
-# 	left, right := 0, len(matrix[0])-1
-# 	var res []int
-
-# 	for top < bottom && left < right {
-# 		for i := left; i <= right; i++ {
-# 			res = append(res, matrix[top][i])
-# 		}
-# 		top++
-
-# 		for i := top; i <= bottom; i++ {
-# 			res = append(res, matrix[i][right])
-# 		}
-# 		right--
-
-# 		for i := right; i >= left; i-- {
-# 			res = append(res, matrix[bottom][i])
-# 		}
-# 		bottom--
-
-# 		for i := bottom; i >= top; i-- {
-# 			res = append(res, matrix[i][left])
-# 		}
-# 		left++
-# 	}
-# 	for i := top; i <= bottom; i++ {
-# 		for j := left; j <= right; j++ {
-# 			res = append(res, matrix[i][j])
-# 		}
-# 	}
-#     return res
-# }
 # @lc code=end
