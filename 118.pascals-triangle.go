@@ -37,6 +37,31 @@
 
 // @lc code=start
 func generate(numRows int) [][]int {
+    // return calculateFromPreviousRow(numRows)
+    return combinations(numRows)
+}
+
+// Calculate using (r-1)C(c-1) (1-index)
+func combinations(numRows int) [][]int {
+    pascalTri := [][]int{
+        []int{1},
+    }
+    rowCount := 1
+    for rowCount < numRows {
+        row := []int{1}
+        prev := 1
+        for col := 1; col <= rowCount; col++ {
+			currentElement := prev * (rowCount - col + 1) / col
+            row = append(row, currentElement)
+            prev = currentElement
+        }
+        pascalTri = append(pascalTri, row)
+		rowCount++
+    }
+    return pascalTri
+}
+
+func calculateFromPreviousRow(numRows int) [][]int {
     pascalTri := [][]int{
         []int{1},
     }
