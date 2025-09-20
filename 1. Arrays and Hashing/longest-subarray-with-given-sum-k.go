@@ -130,6 +130,7 @@ func main() {
 		{Nums: []int{2, -1, 2, 3}, k: 4, ans: []int{-1, 2, 3}},
 		{Nums: []int{1, 2, -1, 2, -1, 2}, k: 3, ans: []int{1, 2, -1, 2, -1}},
 		{Nums: []int{10, -10, 10, -10, 10}, k: 0, ans: []int{10, -10, 10, -10}},
+		{Nums: []int{9, -3, 3, -1, 6, -5}, k: 0, ans: []int{-3, 3, -1, 6, -5}},
 	}
 	for _, t := range positiveTestCases {
 		ans := longestSubarrayPositive(t.Nums, t.k)

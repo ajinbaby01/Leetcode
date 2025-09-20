@@ -56,6 +56,19 @@ Even if currentSum repeats later:
 That creates new (i, j') pairs with a different ending index j'.
 Those are different subarrays, not repeats of the old one.
 */
+
+/*
+To find all subarrays that equals k,
+instead of storing the count, you can store a slice of indices
+prefixMap[0] = []int{-1}
+if starts, ok := prefixMap[prefixSum - k]; ok {
+	for _, start := range starts {
+		result = append(result, [2]int{start + 1, i})
+    }
+}
+prefixMap[currentSum] = append(prefixMap[currentSum], i)
+i = index of num in the loop
+*/
 func subarraySum(nums []int, k int) int {
 	count := 0
 	currentSum := 0 // This variable stores the prefix sum up to the current index

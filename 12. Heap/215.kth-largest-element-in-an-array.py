@@ -40,77 +40,12 @@
 #
 
 # @lc code=start
-import random
-
-
 class Solution:
     def findKthLargest(self, nums: List[int], k: int) -> int:
-        # return self.heapFindKthLargest(nums, k)
-        # return self.quickSelectFindKthLargest(nums, k)
-        return self.betterQuickSelectFindKthLargest(nums, k)
-
-    def betterQuickSelectFindKthLargest(self, nums, k):
-        k = len(nums) - k
-
-        def partition(nums):
-            pivot = random.choice(nums)
-            left = [num for num in nums if num < pivot]
-            mid = [num for num in nums if num == pivot]
-            right = [num for num in nums if num > pivot]
-
-            return left, mid, right
-
-        def quickSelect(nums, k):
-            left, mid, right = partition(nums)
-
-            L, M = len(left), len(mid)
-
-            if L + M <= k:
-                return quickSelect(right, k - L - M)
-            elif k < L:
-                return quickSelect(left, k)
-            else:
-                return mid[0]
-
-        return quickSelect(nums, k)
-
-
-    def quickSelectFindKthLargest(self, nums, k):
-        k = len(nums) - k
-
-        def partition(l, r):
-            p = l
-            pivot = nums[r]
-            for i in range(l, r):
-                if nums[i] <= pivot:
-                    nums[i], nums[p] = nums[p], nums[i]
-                    p += 1
-            nums[p], nums[r] = nums[r], nums[p]
-            return p
-
-        def quickSelect(l, r):
-            p = partition(l, r)
-
-            if p == k:
-                return nums[p]
-            elif p < k:
-                return quickSelect(p + 1, r)
-            else:
-                return quickSelect(l, p - 1)
-
-        return quickSelect(0, len(nums) - 1)
-    # Avg Time: O(n), Worst Time: O(n^2), Space: O(1)
-    # This solution now TLE because of the last test case
-
-    def heapFindKthLargest(self, nums, k):
         minheap = []
-
         for num in nums:
-            heappush(minheap, num)
-
-            if len(minheap) > k:
-                heappop(minheap)
-
-        return heappop(minheap)
-    # Time: O(nlogk), Space: O(k)
+            heappush(minheap, -num)
+        for _ in range(k):
+            answer = -heappop(minheap)
+        return answer
 # @lc code=end
