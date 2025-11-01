@@ -70,9 +70,10 @@
 // @lc code=start
 package main
 
+import "strings"
+
 func reverseWords(s string) string {
 	var stack []string
-	var res string
 
 	i := 0
 	n := len(s)
@@ -89,13 +90,14 @@ func reverseWords(s string) string {
 		}
 	}
 
+	var sb strings.Builder
 	for i := len(stack) - 1; i >= 0; i-- {
-		res += stack[i]
+		sb.WriteString(stack[i])
 		if i != 0 {
-			res += " "
+			sb.WriteByte(' ')
 		}
 	}
-	return res
+	return sb.String()
 }
 
 // @lc code=end
