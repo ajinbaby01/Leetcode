@@ -67,7 +67,7 @@ func iterativeBFS(root *TreeNode) int {
 	depth := 0
 	for len(q) != 0 {
 		qLen := len(q)
-		for _ = range qLen {
+		for range qLen {
 			node := q[0]
 			q = q[1:]
 			if node.Left != nil {
@@ -91,7 +91,7 @@ func iterativeDFS(root *TreeNode) int {
 		Node  *TreeNode
 		Depth int
 	}
-	stack := []NodeDepth{NodeDepth{
+	stack := []NodeDepth{{
 		Node:  root,
 		Depth: 1,
 	}}
@@ -121,6 +121,21 @@ func recursiveDFS(root *TreeNode) int {
 		return 1 + max(recursiveDFS(root.Left), recursiveDFS(root.Right))
 	}
 	return 0
+
+	// if root == nil {
+	// 	return 0
+	// }
+	// maxDepth := 0
+	// var dfs func(root *TreeNode, depth int)
+	// dfs = func(root *TreeNode, depth int) {
+	// 	if root != nil {
+	// 		maxDepth = max(maxDepth, depth)
+	// 		dfs(root.Left, depth + 1)
+	// 		dfs(root.Right, depth + 1)
+	// 	}
+	// }
+	// dfs(root, 1)
+	// return maxDepth
 }
 
 // @lc code=end
