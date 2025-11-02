@@ -78,8 +78,40 @@
  *     Right *TreeNode
  * }
  */
+package main
+
 func postorderTraversal(root *TreeNode) []int {
-	return recursive(root)
+	// return recursive(root)
+	return iterative(root)
+}
+
+func iterative(root *TreeNode) []int {
+	var postorder []int
+	var stack []*TreeNode
+	// Tracks the most recently processed node to determine if a right subtree has already been visited
+	var lastVisited *TreeNode
+
+	for root != nil || len(stack) != 0 {
+		for root != nil {
+			stack = append(stack, root)
+			root = root.Left
+		}
+		// Peek if the node has an unvisited right subtree
+		// If so visit it first (left -> right -> root)
+		// Not going to actually pop the node because we need to visit it after visiting right subtree
+		peekNode := stack[len(stack)-1]
+		if peekNode.Right != nil && lastVisited != peekNode.Right {
+			root = peekNode.Right
+		} else {
+			// No right subtree or right subtree is already visited
+			// We can visit the node now
+			postorder = append(postorder, peekNode.Val)
+			stack = stack[:len(stack)-1]
+			lastVisited = peekNode
+		}
+	}
+
+	return postorder
 }
 
 func recursive(root *TreeNode) []int {
